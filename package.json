@@ -1,0 +1,46 @@
+{
+  "name": "react-langapi",
+  "version": "1.0.1",
+  "description": "Official React bindings for Lang",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run format",
+    "preversion": "npm run lint",
+    "test": "jest",
+    "dev": "concurrently --kill-others \"tsc -w\" \"nodemon dist/index.js\"",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/PeterLZhou/langapi-client.git"
+  },
+  "author": "Peter Zhou <peterbzhou@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyrieu/react-lang/issues"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/next": "^8.0.1",
+    "@types/node": "^11.9.4",
+    "@types/react": "^16.8.3",
+    "concurrently": "^4.1.0",
+    "jest": "^24.5.0",
+    "langapi-client": "^1.4.10",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.16.3",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.3.3"
+  }
+}
