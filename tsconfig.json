@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["node"],
+    "jsx": "react",
+    "skipLibCheck": true
+  }
+}

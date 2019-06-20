@@ -42,5 +42,9 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.3.3"
+  },
+  "peerDependencies": {
+    "langapi-client": "1.4.10",
+    "react": "^16.8.3"
   }
 }
