@@ -19,9 +19,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/PeterLZhou/langapi-client.git"
+    "url": "git+ssh://git@github.com/cyrieu/react-langapi.git"
   },
-  "author": "Peter Zhou <peterbzhou@gmail.com>",
+  "author": "Eric Yu <cyrieu@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cyrieu/react-lang/issues"
