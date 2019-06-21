@@ -1,18 +1,18 @@
 import * as React from "react";
 import { LangContext } from "./Context";
 
-type LangProviderProps = {
+export type LangProviderProps = {
   currentLanguage?: string;
-  langClient: any;
+  client: any;
 };
 
 class LangProvider extends React.Component<LangProviderProps> {
   render() {
-    const { currentLanguage, langClient } = this.props;
+    const { currentLanguage, client } = this.props;
     // TODO THIS DOES NOT WORK IF CHILDREN IS A NORMAL DOM NODE
-    langClient.setForceLanguage(currentLanguage);
+    client.setForceLanguage(currentLanguage);
     return LangContext ? (
-      <LangContext.Provider value={{ currentLanguage, client: langClient }}>
+      <LangContext.Provider value={{ currentLanguage, client }}>
         {this.props.children}
       </LangContext.Provider>
     ) : (
