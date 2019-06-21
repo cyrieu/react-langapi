@@ -24,7 +24,7 @@
   "author": "Eric Yu <cyrieu@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cyrieu/react-lang/issues"
+    "url": "https://github.com/cyrieu/react-langapi/issues"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
