@@ -42,7 +42,15 @@ export default function injectLang<
       <IntlConsumer>
         {(value?: LangContextValue) => {
           // TODO fix these typings
-          const { client, currentLanguage } = value!;
+          if (!value) {
+            return (
+              <WrappedComponent
+                {...props}
+                ref={forwardRef ? props.forwardedRef : null}
+              />
+            );
+          }
+          const { client, currentLanguage } = value;
           return (
             <WrappedComponent
               {...props}
