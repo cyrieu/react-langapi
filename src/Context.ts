@@ -1,7 +1,8 @@
 import * as React from "react";
+import { LangTranslateClient } from "langapi-client/dist/LangTranslateClient";
 
 export type LangContextValue = {
-  client?: any; // TODO type Lang client
+  client?: LangTranslateClient;
   currentLanguage?: string;
 };
 
