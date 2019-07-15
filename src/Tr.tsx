@@ -1,26 +1,16 @@
-import styled from "@emotion/styled";
 import * as React from "react";
 import LangContext, { LangContextValue } from "./Context";
+import { TrOptions } from "./types";
 
-// export default function Tr(thing: any) {
-//   const { children, ...props } = thing;
-
-//   let originalText = "";
-//   // Check if it is an array
-//   if (children.constructor === Array) {
-//     originalText = children.join("");
-//   } else {
-//     originalText = children;
-//   }
-//   // return React.createElement(TrComponent, {}, this.tr(originalText, props));
-//   return this.tr(originalText, props);
-// }
-
-type Props = any;
+type TrProps = {
+  description?: string;
+  variables?: any;
+  options?: TrOptions;
+};
 
 type State = {};
 
-class Tr extends React.Component<Props, State> {
+class Tr extends React.Component<TrProps, State> {
   render() {
     if (!LangContext) {
       return this.props.children || "";
@@ -35,7 +25,13 @@ class Tr extends React.Component<Props, State> {
           if (!client) {
             return this.props.children || "";
           }
-          const { children, ...props } = this.props;
+          const {
+            children,
+            description,
+            variables,
+            options,
+            ...rest
+          } = this.props;
           let originalText: string = "";
           if (!children) {
             originalText = "";
@@ -44,9 +40,8 @@ class Tr extends React.Component<Props, State> {
           } else {
             originalText = children as string; // TODO fix for child components
           }
-          console.log("IM IN THE CONSUMER");
-          console.log(value);
-          return client.tr(originalText, props);
+          // For now options is any until langapi-client completely removes forceLanguage as string
+          return client.tr(originalText, variables, options as any);
         }}
       </LangContext.Consumer>
     );
