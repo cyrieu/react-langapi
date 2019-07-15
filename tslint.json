@@ -17,6 +17,7 @@
     "member-ordering": false,
     "semicolon": false,
     "interface-name": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "trailing-comma": false
   }
 }
