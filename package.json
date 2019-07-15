@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.14",
-    "@emotion/styled": "^10.0.14"
+    "@emotion/styled": "^10.0.14",
+    "hoist-non-react-statics": "^3.3.0"
   }
 }

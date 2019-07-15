@@ -1,4 +1,5 @@
 import LangProvider from "./LangProvider";
 import Tr from "./Tr";
+import injectLang from "./injectLang";
 
-export { LangProvider, Tr };
+export { LangProvider, Tr, injectLang };
