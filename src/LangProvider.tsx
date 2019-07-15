@@ -7,7 +7,7 @@ export type LangProviderProps = {
   langClient: any;
 };
 
-class LangProvider extends React.Component<LangProviderProps> {
+class LangProvider extends React.Component<LangProviderProps, {}> {
   render() {
     const { currentLanguage, client, langClient } = this.props;
     // TODO THIS DOES NOT WORK IF CHILDREN IS A NORMAL DOM NODE
