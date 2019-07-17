@@ -60,7 +60,6 @@ function myMapAST(children: React.ReactNode, ast: any) {
   return;
 }
 
-// TODO not done
 function mapAST(astNodes: any, reactNodeReferences: React.ReactNode[]) {
   return astNodes.reduce(
     (
