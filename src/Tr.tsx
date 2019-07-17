@@ -1,5 +1,6 @@
 import * as React from "react";
 import LangContext, { LangContextValue } from "./Context";
+import { parseOriginalText, renderNodes } from "./reactUtils";
 import { TrOptions } from "./types";
 
 type TrProps = {
@@ -33,15 +34,17 @@ class Tr extends React.Component<TrProps, State> {
             ...rest
           } = this.props;
           let originalText: string = "";
-          if (!children) {
-            originalText = "";
-          } else if (children.constructor === Array) {
-            originalText = (children as any).join("");
-          } else {
-            originalText = children as string; // TODO fix for child components
-          }
-          // For now options is any until langapi-client completely removes forceLanguage as string
-          return client.tr(originalText, variables, options as any);
+          originalText = parseOriginalText(children, {
+            index: 1
+          });
+
+          const translatedText = client.tr(
+            originalText,
+            variables,
+            options as any
+          ) as string;
+
+          return renderNodes(children, translatedText);
         }}
       </LangContext.Consumer>
     );
