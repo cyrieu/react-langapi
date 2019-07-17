@@ -44,10 +44,7 @@ class Tr extends React.Component<TrProps, State> {
             options as any
           ) as string;
 
-          const output = renderNodes(children, translatedText);
-          console.log(output);
-          // For now options is any until langapi-client completely removes forceLanguage as string
-          return translatedText;
+          return renderNodes(children, translatedText);
         }}
       </LangContext.Consumer>
     );

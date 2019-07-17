@@ -1,6 +1,11 @@
 import * as HTML from "html-parse-stringify2";
 import * as React from "react";
 
+const tagRe = /<(\d+)>(.*)<\/\1>|<(\d+)\/>/;
+const nlRe = /(?:\r\n|\r|\n)/g;
+const helpTagRe = /(<(\d+)>(.*)<(\/\2)>|<\d+\/>)/g;
+
+const openingTagRe = /<(\d+)>/gm;
 function hasChildren(node: any) {
   return node && (node.children || (node.props && node.props.children));
 }
@@ -22,41 +27,41 @@ function hasValidReactChildren(children: any) {
   return children.every(child => React.isValidElement(child));
 }
 
+// Returns a mapping of div # to react node
+export function collectReactReferences(
+  node: any,
+  reactComponentList: React.ReactNode[]
+) {
+  if (node && typeof node === "object" && node.length) {
+    node.forEach(child => {
+      if (typeof child === "string") {
+        return;
+      }
+
+      reactComponentList.push(child);
+      collectReactReferences(getChildren(child), reactComponentList);
+    });
+  }
+}
+
 export function renderNodes(children: React.ReactNode, targetPhrase: string) {
   if (!targetPhrase) {
     return [];
   }
 
+  const reactComponentList: React.ReactNode[] = [];
+  collectReactReferences(children, reactComponentList);
+
   const ast = HTML.parse(`<0>${targetPhrase}</0>`);
+  return mapAST(ast[0].children, reactComponentList);
+}
 
-  "<0>Hello <1>there!</1></0>"
-
-  "<0><1>¡Hola!</1></0>"
-
-  react: "<div>text</div> <b>some</b>"
-  stripped: "<0>text</0> <1>some</1>"
-  translated: "<1>asdf</1> <0>lol</0>"
-  translatedMapping: {
-    0: lol
-    1: asdf
-  }
-
-
-
-  "<0>text</0> <1>"
-  console.log("BEGIN");
-  console.log(children);
-  console.log(ast);
-
-  const output = mapAST([{ dummy: true, children }], ast);
-  console.log("DONE");
-  console.log(output);
-
-  React.createElement("div");
+function myMapAST(children: React.ReactNode, ast: any) {
+  return;
 }
 
 // TODO not done
-function mapAST(reactNodes: any, astNodes: any) {
+function mapAST(astNodes: any, reactNodeReferences: React.ReactNode[]) {
   return astNodes.reduce(
     (
       intermediateChildrenList: any[],
@@ -64,25 +69,21 @@ function mapAST(reactNodes: any, astNodes: any) {
       currentIndex: number
     ) => {
       if (currentNode.type === "tag") {
-        const reactChild = reactNodes[currentIndex];
-        if (typeof reactChild === "string") {
-          intermediateChildrenList.push(reactChild);
-        } else if (hasChildren(reactChild)) {
-          const children = getChildren(reactChild);
-          const mappedChildren = mapAST(children, currentNode.children);
-          const inner =
-            hasValidReactChildren(children) && mappedChildren.length === 0
-              ? children
-              : mappedChildren;
+        const reactChild: any =
+          reactNodeReferences[parseInt(currentNode.name, 10) - 1];
 
-          if (reactChild.dummy) {
-            reactChild.children = inner;
-          }
+        if (!currentNode.children || !currentNode.children.length) {
+          intermediateChildrenList.push(reactChild);
+        } else {
+          const mappedChildren = mapAST(
+            currentNode.children,
+            reactNodeReferences
+          );
           intermediateChildrenList.push(
             React.cloneElement(
               reactChild,
-              { ...reactChild.props, key: currentIndex },
-              inner
+              { ...reactChild.props, key: currentNode.name },
+              mappedChildren
             )
           );
         }
