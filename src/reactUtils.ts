@@ -32,7 +32,14 @@ export function collectReactReferences(
   node: any,
   reactComponentList: React.ReactNode[]
 ) {
-  if (node && typeof node === "object" && node.length) {
+  if (!node) {
+    return;
+  }
+  if (typeof node === "object" && !node.length) {
+    // single node
+    reactComponentList.push(node);
+    collectReactReferences(getChildren(node), reactComponentList);
+  } else if (typeof node === "object" && node.length) {
     node.forEach(child => {
       if (typeof child === "string") {
         return;
@@ -56,10 +63,6 @@ export function renderNodes(children: React.ReactNode, targetPhrase: string) {
   return mapAST(ast[0].children, reactComponentList);
 }
 
-function myMapAST(children: React.ReactNode, ast: any) {
-  return;
-}
-
 function mapAST(astNodes: any, reactNodeReferences: React.ReactNode[]) {
   return astNodes.reduce(
     (
@@ -70,7 +73,6 @@ function mapAST(astNodes: any, reactNodeReferences: React.ReactNode[]) {
       if (currentNode.type === "tag") {
         const reactChild: any =
           reactNodeReferences[parseInt(currentNode.name, 10) - 1];
-
         if (!currentNode.children || !currentNode.children.length) {
           intermediateChildrenList.push(reactChild);
         } else {
@@ -117,7 +119,8 @@ export function parseOriginalText(
     )}${closingTag}`;
   } else if (typeof children === "string") {
     return children;
+  } else if (typeof children === "undefined") {
+    return "";
   }
-
   return children;
 }
