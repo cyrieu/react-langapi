@@ -38,11 +38,10 @@ class Tr extends React.Component<TrProps, State> {
             index: 1
           });
 
-          const translatedText = client.tr(
-            originalText,
-            variables,
-            options as any
-          ) as string;
+          const translatedText = client.tr(originalText, variables, {
+            ...options,
+            preserveWhitespace: true
+          }) as string;
 
           return renderNodes(children, translatedText);
         }}
