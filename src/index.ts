@@ -6,8 +6,10 @@ import FormatDate from "./Date";
 import FormatNumber from "./Number";
 import FormatTime from "./Time";
 import FormatRelativeTime from "./RelativeTime";
+import LangContext from "./Context";
 
 export {
+  LangContext,
   LangProvider,
   Tr,
   injectLang,
