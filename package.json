@@ -33,7 +33,7 @@
     "@types/react": "^16.8.3",
     "concurrently": "^4.1.0",
     "jest": "^24.5.0",
-    "langapi-client": "^1.4.25",
+    "langapi-client": "^1.4.29",
     "nodemon": "^1.18.9",
     "prettier": "^1.16.3",
     "react": "^16.8.2",
@@ -41,10 +41,10 @@
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.3.3"
+    "typescript": "^3.5.1"
   },
   "peerDependencies": {
-    "langapi-client": "^1.4.25",
+    "langapi-client": "^1.4.29",
     "react": "^16.8.3"
   },
   "dependencies": {
