@@ -2,8 +2,11 @@ import * as React from "react";
 import LangContext, { LangContextValue } from "./Context";
 import { parseOriginalText, renderNodes } from "./reactUtils";
 import { TrOptions } from "./types";
+import {LangTranslateClient} from "langapi-client/dist/LangTranslateClient";
+import {ReactNode} from "react";
 
 type TrProps = {
+  client?: LangTranslateClient
   description?: string;
   variables?: any;
   options?: TrOptions;
@@ -12,38 +15,54 @@ type TrProps = {
 type State = {};
 
 class Tr extends React.Component<TrProps, State> {
+  renderNodes(
+      client: LangTranslateClient,
+      children: ReactNode,
+      variables: any,
+      options?: TrOptions
+  ) {
+    const originalText: string = parseOriginalText(children, {
+      index: 1
+    });
+
+    const translatedText = client.tr(originalText, variables, {
+      ...options,
+      preserveWhitespace: true
+    }) as string;
+
+    return renderNodes(children, translatedText);
+  }
+
   render() {
-    if (!LangContext) {
-      return this.props.children || "";
+    const {
+      children,
+      description,
+      variables,
+      options,
+      client,
+      ...rest
+    } = this.props;
+
+    const fallback = <div>{children}</div> || false;
+
+    if (!LangContext && !client) {
+      return fallback
     }
-    return (
+
+    return client ? (
+      this.renderNodes(client, children, variables, options)
+    ) : (
       <LangContext.Consumer>
         {(value?: LangContextValue) => {
           if (!value) {
-            return this.props.children || "";
+            return fallback;
           }
-          const { client } = value;
-          if (!client) {
-            return this.props.children || "";
+          const { client: contextClient } = value;
+          if (!contextClient) {
+            return fallback;
           }
-          const {
-            children,
-            description,
-            variables,
-            options,
-            ...rest
-          } = this.props;
-          let originalText: string = "";
-          originalText = parseOriginalText(children, {
-            index: 1
-          });
 
-          const translatedText = client.tr(originalText, variables, {
-            ...options,
-            preserveWhitespace: true
-          }) as string;
-
-          return renderNodes(children, translatedText);
+          return this.renderNodes(contextClient, children, variables, options);
         }}
       </LangContext.Consumer>
     );
