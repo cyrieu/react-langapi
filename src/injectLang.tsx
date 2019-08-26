@@ -30,7 +30,7 @@ export default function injectLang<
 ): React.ComponentType<WithIntlProps<P>> & {
   WrappedComponent: typeof WrappedComponent;
 } {
-  const { intlPropName = "intl", forwardRef = false, enforceContext = true } =
+  const { intlPropName = "intl", forwardRef = false } =
     options || {};
 
   const WithIntl: React.FC<P & { forwardedRef?: React.Ref<any> }> & {

@@ -8,6 +8,7 @@ import FormatTime from "./Time";
 import FormatRelativeTime from "./RelativeTime";
 import LangContext from "./Context";
 import TrLegacy from "./TrLegacy";
+import withLang from "./withLang";
 
 export {
   LangContext,
@@ -18,5 +19,6 @@ export {
   FormatDate,
   FormatNumber,
   FormatTime,
-  FormatRelativeTime
+  FormatRelativeTime,
+  withLang,
 };

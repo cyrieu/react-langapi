@@ -26,7 +26,7 @@ class TrLegacy extends React.Component<TrProps, State> {
         const fallback = children ? <div>{children}</div> : false;
 
         // translated react nodes
-        return (client && renderNodes(client, children, variables, options))
+        return (client && <div>{renderNodes(client, children, variables, options)}</div>)
             || fallback;
     }
 }
