@@ -13,39 +13,33 @@ type State = {};
 
 class Tr extends React.Component<TrProps, State> {
   render() {
+    const {
+      children,
+      description,
+      variables,
+      options,
+      ...rest
+    } = this.props;
+
+    const fallback = children || "";
+
     if (!LangContext) {
-      return this.props.children || "";
+      return fallback;
     }
+
     return (
-      <LangContext.Consumer>
-        {(value?: LangContextValue) => {
-          if (!value) {
-            return this.props.children || "";
-          }
-          const { client } = value;
-          if (!client) {
-            return this.props.children || "";
-          }
-          const {
-            children,
-            description,
-            variables,
-            options,
-            ...rest
-          } = this.props;
-          let originalText: string = "";
-          originalText = parseOriginalText(children, {
-            index: 1
-          });
+        <LangContext.Consumer>
+          {(value?: LangContextValue) => {
+            if (!value) {
+              return fallback;
+            }
+            const { client } = value;
 
-          const translatedText = client.tr(originalText, variables, {
-            ...options,
-            preserveWhitespace: true
-          }) as string;
-
-          return renderNodes(children, translatedText);
-        }}
-      </LangContext.Consumer>
+            // translated react nodes
+            return (client && renderNodes(client, children, variables, options))
+                || fallback;
+          }}
+        </LangContext.Consumer>
     );
   }
 }

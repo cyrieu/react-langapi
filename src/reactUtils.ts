@@ -1,5 +1,8 @@
 import * as HTML from "html-parse-stringify2";
 import * as React from "react";
+import {LangTranslateClient} from "langapi-client/dist/LangTranslateClient";
+import {ReactNode} from "react";
+import {TrOptions} from "./types";
 
 const tagRe = /<(\d+)>(.*)<\/\1>|<(\d+)\/>/;
 const nlRe = /(?:\r\n|\r|\n)/g;
@@ -27,6 +30,28 @@ function hasValidReactChildren(children: any) {
   return children.every(child => React.isValidElement(child));
 }
 
+export function renderNodes(
+  client: LangTranslateClient,
+  children: ReactNode,
+  variables: any,
+  options?: TrOptions
+) {
+  const originalText: string = parseOriginalText(children, {
+    index: 1
+  });
+
+  const translatedText = client.tr(originalText, variables, {
+    ...options,
+    preserveWhitespace: true
+  });
+
+  if (!translatedText) {
+    return null;
+  }
+
+  return getTransformedChildren(children, translatedText);
+}
+
 // Returns a mapping of div # to react node
 export function collectReactReferences(
   node: any,
@@ -51,7 +76,7 @@ export function collectReactReferences(
   }
 }
 
-export function renderNodes(children: React.ReactNode, targetPhrase: string) {
+export function getTransformedChildren(children: React.ReactNode, targetPhrase: string) {
   if (!targetPhrase) {
     return [];
   }

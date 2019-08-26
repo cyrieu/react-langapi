@@ -3,8 +3,6 @@ import LangContext, { LangContextValue } from "./Context";
 import * as hoistNonReactStatics_ from "hoist-non-react-statics";
 const hoistNonReactStatics: typeof hoistNonReactStatics_ = require("hoist-non-react-statics");
 
-const IntlConsumer = LangContext.Consumer;
-
 function getDisplayName(Component: React.ComponentType<any>) {
   return Component.displayName || Component.name || "Component";
 }
@@ -32,14 +30,14 @@ export default function injectLang<
 ): React.ComponentType<WithIntlProps<P>> & {
   WrappedComponent: typeof WrappedComponent;
 } {
-  const { intlPropName = "intl", forwardRef = false, enforceContext = true } =
+  const { intlPropName = "intl", forwardRef = false } =
     options || {};
 
   const WithIntl: React.FC<P & { forwardedRef?: React.Ref<any> }> & {
     WrappedComponent: typeof WrappedComponent;
   } = props => {
     return (
-      <IntlConsumer>
+      <LangContext.Consumer>
         {(value?: LangContextValue) => {
           // TODO fix these typings
           if (!value) {
@@ -63,7 +61,7 @@ export default function injectLang<
             />
           );
         }}
-      </IntlConsumer>
+      </LangContext.Consumer>
     );
   };
 
