@@ -3,7 +3,7 @@ import { renderNodes } from "./reactUtils";
 import { TrOptions } from "./types";
 import {LangTranslateClient} from "langapi-client/dist/LangTranslateClient";
 
-type TrProps = {
+type TrLegacyProps = {
     client: LangTranslateClient
     description?: string;
     variables?: any;
@@ -12,7 +12,7 @@ type TrProps = {
 
 type State = {};
 
-class TrLegacy extends React.Component<TrProps, State> {
+class TrLegacy extends React.Component<TrLegacyProps, State> {
     render() {
         const {
             children,
