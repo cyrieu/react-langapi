@@ -583,6 +583,14 @@
     "@types/react" "*"
     "@types/webpack" "*"
 
+"@types/react-native@^0.60.2":
+  version "0.60.26"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.60.26.tgz#cfbb02c39cd162240d59f4922b5bdeb0c212f90d"
+  integrity sha512-M2ZE5/65Z+cmnP0hz/ImsR4eeqgHenLPWIxhJiaWsTuIMYlTfOxSIqkJQ0SFm4BdklxDS1aaH4+3d8ve+0LHMQ==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.8.3":
   version "16.8.21"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.21.tgz#aefb32519a4111964993be5b2bd3f172f81c34ff"
@@ -1283,10 +1291,15 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.12.1, commander@~2.20.0:
+commander@^2.12.1:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
+
+commander@~2.20.3:
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
 component-emitter@^1.2.1:
   version "1.3.0"
@@ -1951,9 +1964,9 @@ growly@^1.3.0:
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
 handlebars@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.2.tgz#b6b37c1ced0306b221e094fc7aca3ec23b131b67"
-  integrity sha512-nvfrjqvt9xQ8Z/w0ijewdD/vvWDTOweBUm96NTr66Wfvo1mJenBLwcYmPs3TIBP5ruzYGD7Hx/DaM9RmhroGPw==
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
+  integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
@@ -2935,13 +2948,14 @@ kleur@^3.0.2:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-langapi-client@^1.4.25:
-  version "1.4.25"
-  resolved "https://registry.yarnpkg.com/langapi-client/-/langapi-client-1.4.25.tgz#036e81b0878300f71e973a4ae30d8b600c9d8d92"
-  integrity sha512-l5jaY5+dZpOP6vPUVXNjjxat0K/vRV2Thic8S20RKwagK3qVReMejjSIUaS/3/xgWdVK2AIk6CdmAwmzKUTQig==
+langapi-client@^1.4.30:
+  version "1.4.34"
+  resolved "https://registry.yarnpkg.com/langapi-client/-/langapi-client-1.4.34.tgz#798e41cb17eef19845b4bda282c714072a5c86ff"
+  integrity sha512-NFdez3mgZeoFKXAmGRg71RcTL9c1w99x7IZdSYJxj7K/XtTlDGzB2tdRipXgVPN48OYN7IwdjTKEjnKngMSjYQ==
   dependencies:
     "@formatjs/intl-relativetimeformat" "^2.4.0"
     "@sentry/browser" "^5.5.0"
+    "@types/react-native" "^0.60.2"
     apollo-boost "^0.4.3"
     babel-polyfill "^6.26.0"
     bowser "^2.1.0"
@@ -4517,17 +4531,17 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-typescript@^3.3.3:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
-  integrity sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
+typescript@^3.5.1:
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.4.tgz#1743a5ec5fef6a1fa9f3e4708e33c81c73876c19"
+  integrity sha512-A25xv5XCtarLwXpcDNZzCGvW2D1S3/bACratYBx2sax8PefsFhlYmkQicKHvpYflFS8if4zne5zT5kpJ7pzuvw==
 
 uglify-js@^3.1.4:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.0.tgz#704681345c53a8b2079fb6cec294b05ead242ff5"
-  integrity sha512-W+jrUHJr3DXKhrsS7NUVxn3zqMOFn0hL/Ei6v0anCIMoKC93TjcflTagwIHLW7SfMFfiQuktQyFVCFHGUE0+yg==
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.3.tgz#f918fce9182f466d5140f24bb0ff35c2d32dcc6a"
+  integrity sha512-7tINm46/3puUA4hCkKYo4Xdts+JDaVC9ZPRcG8Xw9R4nhO/gZgUM3TENq8IF4Vatk8qCig4MzP/c8G4u2BkVQg==
   dependencies:
-    commander "~2.20.0"
+    commander "~2.20.3"
     source-map "~0.6.1"
 
 undefsafe@^2.0.2:
